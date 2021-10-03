@@ -15,10 +15,11 @@ Including another URLconf
 """
 from django.contrib import admin
 from django.urls import path
+from django.urls.conf import include
 
-from msg_manager.views import hello_world
+
 
 urlpatterns = [
     path('admin/', admin.site.urls),
-    path('hello/',hello_world)
+    path('msg/',include('msg_manager.urls'))
 ]
