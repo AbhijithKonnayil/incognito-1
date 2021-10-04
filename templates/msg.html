@@ -3,6 +3,13 @@
 <body>
     <h1>Messages</h1>
     <h2>Hello, {{key}}</h2>
+    <ol>
+        {% for each in msgs%}
+        <li>
+            {{each.text}}
+        </li>
+        {% endfor %}
+    </ol>
 </body>
 
 </html>
