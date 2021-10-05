@@ -1,7 +1,7 @@
 from django.urls import path
-from msg_manager.views import hello_world
+from msg_manager.views import MessageView,hello_world
 
 urlpatterns = [
-    path('',hello_world)
+    path('',MessageView.as_view())
 ]
 
