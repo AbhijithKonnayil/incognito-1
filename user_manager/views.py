@@ -8,15 +8,18 @@ class LoginView(View):
     def post(self,request):
         print(request.POST)
         form=LoginForm(request.POST)
-        print(form)
+        #print(form)
         if(form.is_valid()):
             username = form.cleaned_data['username']
             password = form.cleaned_data['password']
             user = authenticate(request, username=username, password=password)
+            print("user - ",user)
             if(user):
                 login(request, user)
                 print(request.user)
-            return HttpResponseRedirect('/msg/')
+                return HttpResponseRedirect('/msg/')
+            else:
+                return render(request, 'login.html', {'form':form,'error':'Invalid Credentials'})   
         else:
             return render(request, 'login.html', {'form':form})   
 

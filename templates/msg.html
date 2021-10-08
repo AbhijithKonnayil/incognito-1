@@ -1,23 +1,20 @@
-<html>
-
-<body>
-    <h1>Messages</h1>
-    <h2>Hello, {{key}}</h2>
-    <form action="" method="POST">
-        {% csrf_token %}
-        {{form}}
-        <input type="submit">
-    </form>
-    {% if rec%}
-    <h3>Your message has been sent</h3>
-    {% endif %}
-    <ol>
-        {% for each in msgs%}
-        <li>
-            {{each.text}}
-        </li>
-        {% endfor %}
-    </ol>
-</body>
-
-</html>
+{% extends 'base.html' %}
+{% block body %}
+<h1>Messages</h1>
+<h2>Hello, {{key}}</h2>
+<form action="" method="POST">
+    {% csrf_token %}
+    {{form}}
+    <input type="submit">
+</form>
+{% if rec%}
+<h3>Your message has been sent</h3>
+{% endif %}
+<ol>
+    {% for each in msgs%}
+    <li>
+        {{each.text}}
+    </li>
+    {% endfor %}
+</ol>
+{% endblock%}
