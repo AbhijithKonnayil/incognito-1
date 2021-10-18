@@ -26,3 +26,8 @@ class LoginView(View):
     def get(self, request):
         form = LoginForm()
         return render(request, 'login.html', {'form':form}) 
+
+class LogoutView(View):
+    def get(self,request):
+        logout(request)
+        return HttpResponseRedirect('/login')

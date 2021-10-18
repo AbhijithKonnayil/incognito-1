@@ -1,7 +1,8 @@
 from django.urls import path
-from msg_manager.views import MessageView,hello_world
+from msg_manager.views import MessageSend, MessageView,hello_world
 
 urlpatterns = [
-    path('<username>/',MessageView.as_view())
+    path('<username>/',MessageSend.as_view()),
+    path('',MessageView.as_view())
 ]
 

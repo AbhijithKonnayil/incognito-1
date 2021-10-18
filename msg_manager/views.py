@@ -1,4 +1,4 @@
-from django.http.response import HttpResponse
+from django.http.response import HttpResponse, HttpResponseRedirect
 from django.shortcuts import render
 from django.views import View
 from .models import Message
@@ -22,22 +22,21 @@ def hello_world(request):
 
 class MessageView(View):
     
-    def get(self,request,username):
+    def get(self,request):
         if(request.user.is_authenticated):
-            form=MessageForm()
             msgs=Message.objects.filter(user=request.user)
             name = request.user.username
-            return render(request,'msg.html',{'key':name,'form':form,'msgs':msgs})
-        raise PermissionError('Permission Denied')
+            return render(request,'msg.html',{'key':name,'msgs':msgs})
+        return HttpResponseRedirect('/login')
+    
+class MessageSend(View):
+    def get(self,request,username):
+        form=MessageForm()
+        return render(request,'msg_send.html',{'name':username,'form':form,})
+
     def post(self,request,username):
-        print(username)
         text=request.POST.get('text')
         user = User.objects.get(username=username)
         Message.objects.create(text=text,user=user)
         form=MessageForm()
-        msgs=Message.objects.filter(user=request.user)
-        name = request.user.username
-        return render(request,'msg.html',{'key':name,'form':form,'msgs':msgs,'rec':True})
-
-#MessageSend
-#
+        return render(request,'msg_send.html',{'name':username,'form':form,'rec':True})

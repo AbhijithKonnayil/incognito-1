@@ -23,5 +23,6 @@ from user_manager.views import LoginView
 urlpatterns = [
     path('admin/', admin.site.urls),
     path('msg/',include('msg_manager.urls')),
-    path('login/',LoginView.as_view())
+    path('login/',LoginView.as_view()),
+    path('logout/',LoginView.as_view())
 ]

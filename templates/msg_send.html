@@ -1,0 +1,10 @@
+<h1>Messages</h1>
+<h2>Hello,send msg to {{name}}</h2>
+<form action="" method="POST">
+    {% csrf_token %}
+    {{form}}
+    <input type="submit">
+</form>
+{% if rec%}
+<h3>Your message has been sent</h3>
+{% endif %}
